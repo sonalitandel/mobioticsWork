@@ -25,7 +25,7 @@ const upload = multer({
   storage: multerS3({
     acl: 'public-read',
     s3,
-    bucket: 'sonali-node-angular-s3',
+    bucket: 'myawsbucketa07',
     key: function(req, file, cb) {
       /*I'm using Date.now() to make sure my file has a unique name*/
       console.log('inside file upload file')

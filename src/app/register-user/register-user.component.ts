@@ -63,6 +63,11 @@ export class RegisterUserComponent implements OnInit {
     imageForm.append('image', this.imageObj);
     this.commonService.imageUpload(imageForm).subscribe(res => {
       this.imageUrl = res['image'];
+      console.log(this.imageUrl)
+      if(this.imageUrl)
+      {
+        alert('Photo uploaded sucessfully');
+      }
     });
    }
 
