@@ -1,5 +1,7 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { HttpResponse } from 'aws-sdk';
 import { UserData } from '../models/UserDetails.model';
 import { CommonService } from '../shared/common.service';
 
@@ -14,6 +16,11 @@ export class RegisterUserComponent implements OnInit {
   userDetailsArr: UserData[];
   userListArr: any;
   showList: Boolean = false;
+  selectedFiles: FileList;
+  currentFileUpload: File;
+  progress: { percentage: number } = { percentage: 0 };
+  imageObj: File;
+   imageUrl: string;
   constructor(private commonService: CommonService) { }
 
   ngOnInit(): void {
@@ -46,10 +53,19 @@ export class RegisterUserComponent implements OnInit {
     });
 
   }
-  onFileUpload(files)
-  {
-console.log(files)
-  }
+  onImagePicked(event: Event): void {
+    const FILE = (event.target as HTMLInputElement).files[0];
+    this.imageObj = FILE;
+   }
+
+   onImageUpload() {
+    const imageForm = new FormData();
+    imageForm.append('image', this.imageObj);
+    this.commonService.imageUpload(imageForm).subscribe(res => {
+      this.imageUrl = res['image'];
+    });
+   }
+
   getAllUser() {
     this.commonService.getUserDetaillsList().subscribe(x => {
       this.userListArr = x;

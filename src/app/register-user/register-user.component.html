@@ -20,9 +20,10 @@
             <div class="form-group">
                 <label for="ProfilePictureUrl" class="sr-only">Profile Picture Url:</label>
                 <input type="file" formControlName="ProfilePictureUrl" id="ProfilePictureUrl" class="form-control"
-                    placeholder="Profile Picture Url" #fileupload (change)="onFileUpload(fileupload.files)"required>
+                    placeholder="Profile Picture Url" #fileupload (change)="onImagePicked($event)"required>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" (click)="RegisterUser()" type="submit">Register User</button>
+            <button (click)="onImageUpload()">Upload Image</button>
+            <button class="btn btn-lg btn-primary btn-block" (click)="RegisterUser();" type="submit">Register User</button>
         </form>
     </div>
 </div>
